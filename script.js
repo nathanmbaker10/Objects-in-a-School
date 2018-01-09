@@ -1,11 +1,15 @@
 var id = 0;
 var teachers =[];
+var students = [];
 function createHTMLElements() {
     selectBox = document.getElementById("additionSelectBox");
     newStudentForm = document.getElementById("newStudentForm");
     newTeacherForm= document.getElementById("newTeacherForm");
     newSectionForm = document.getElementById("newSectionForm");
     messageDiv = document.getElementById("messageDiv");
+    studentFirstNameTextBox = document.getElementById("newStudentFirstName");
+    studentLastNameTextBox = document.getElementById("newStudentLastName");
+    studentGradeSelectBox = document.getElementById("newStudentGradeSelectBox");
 }
 function Person(firstName,lastName) {
     this.id = id;
@@ -22,7 +26,6 @@ function Student(grade, firstName, lastName) {
 function Teacher(subject, firstName, lastName) {
     this.subject = subject;
     Person.call(this, firstName, lastName);
-    teachers.push(this);
 }
 Student.prototype = new Person();
 Teacher.prototype = new Person();
@@ -95,5 +98,12 @@ function selectBoxOptionChosen() {
 
 
 function addObject() {
+    var newObject;
+    switch (parseInt(selectBox.value)){
+        case 0:
+            newObject = new Student(studentFirstNameTextBox.value, studentLastNameTextBox.value, parseInt(studentGradeSelectBox.value))
+            students.push(newObject);
+            messageDiv.innerHTML = "New Student Added!"
+    }
 
 }
