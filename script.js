@@ -90,7 +90,7 @@ function selectBoxOptionChosen() {
                 messageDiv.style.fontStyle = 'italic';
                 messageDiv.innerHTML = "You must add at least one teacher before adding a section.";
             } else {
-                newSectionSelectTeacherBox.children = [];
+                newSectionSelectTeacherBox.options.length = 0;
                 for (var i = 0; i < teachers.length; i++) {
                     var newEl = document.createElement("option");
                     newEl.value = i;
@@ -108,16 +108,23 @@ function addObject() {
     switch (parseInt(selectBox.value)){
         case 0:
             newObject = new Student(studentFirstNameTextBox.value, studentLastNameTextBox.value, parseInt(studentGradeSelectBox.value));
+            studentFirstNameTextBox.value = '';
+            studentLastNameTextBox.value = '';
             students.push(newObject);
             messageDiv.innerHTML = "New Student Added!";
             break;
         case 1:
             newObject = new Teacher(teacherSubjectTextBox.value ,teacherFirstNameTextBox.value, teacherLastNameTextBox.value);
+            teacherSubjectTextBox.value = "";
+            teacherLastNameTextBox.value = "";
+            teacherFirstNameTextBox = "";
             teachers.push(newObject);
             messageDiv.innerHTML = "New Teacher Added!";
             break;
         case 2:
-            newObject = new Section(newSectionNameTextBox.value, parseInt(newSectionMaxSizeTextBox.value), parseInt(newSectionSelectTeacherBox.value));
+            newObject = new Section(newSectionNameTextBox.value, parseInt(newSectionMaxSizeTextBox.value), teachers[parseInt(newSectionSelectTeacherBox.value)]);
+            newSectionMaxSizeTextBox.value = "";
+            newSectionNameTextBox.value = "";
             sections.push(newObject);
             messageDiv.innerHTML = "New Section Added";
             break;
