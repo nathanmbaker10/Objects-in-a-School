@@ -1,6 +1,7 @@
 var id = 0;
-var teachers =[];
+var teachers = [];
 var students = [];
+var sections = [];
 function createHTMLElements() {
     selectBox = document.getElementById("additionSelectBox");
     newStudentForm = document.getElementById("newStudentForm");
@@ -10,6 +11,12 @@ function createHTMLElements() {
     studentFirstNameTextBox = document.getElementById("newStudentFirstName");
     studentLastNameTextBox = document.getElementById("newStudentLastName");
     studentGradeSelectBox = document.getElementById("newStudentGradeSelectBox");
+    teacherSubjectTextBox = document.getElementById("newTeacherSubjectTextBox");
+    teacherFirstNameTextBox = document.getElementById("newTeacherFirstName");
+    teacherLastNameTextBox = document.getElementById("newTeacherLastName");
+    newSectionNameTextBox = document.getElementById("newSectionNameTextBox");
+    newSectionMaxSizeTextBox= document.getElementById("newSectionMaxSizeTextBox");
+    newSectionSelectTeacherBox = document.getElementById("newSectionSelectTeacher");
 }
 function Person(firstName,lastName) {
     this.id = id;
@@ -83,13 +90,12 @@ function selectBoxOptionChosen() {
                 messageDiv.style.fontStyle = 'italic';
                 messageDiv.innerHTML = "You must add at least one teacher before adding a section.";
             } else {
-                var newSelectBox = document.getElementById("newSectionSelectTeacher");
-                newSelectBox = [];
-                for (var i = 0; i<teachers.length; i++) {
+                newSectionSelectTeacherBox.children = [];
+                for (var i = 0; i < teachers.length; i++) {
                     var newEl = document.createElement("option");
                     newEl.value = i;
                     newEl.innerHTML = teachers[i].firstName + " " + teachers[i].lastName;
-                    newSelectBox.appendChild(newEl);
+                    newSectionSelectTeacherBox .appendChild(newEl);
                 }
             }
             break;
@@ -101,9 +107,20 @@ function addObject() {
     var newObject;
     switch (parseInt(selectBox.value)){
         case 0:
-            newObject = new Student(studentFirstNameTextBox.value, studentLastNameTextBox.value, parseInt(studentGradeSelectBox.value))
+            newObject = new Student(studentFirstNameTextBox.value, studentLastNameTextBox.value, parseInt(studentGradeSelectBox.value));
             students.push(newObject);
-            messageDiv.innerHTML = "New Student Added!"
+            messageDiv.innerHTML = "New Student Added!";
+            break;
+        case 1:
+            newObject = new Teacher(teacherSubjectTextBox.value ,teacherFirstNameTextBox.value, teacherLastNameTextBox.value);
+            teachers.push(newObject);
+            messageDiv.innerHTML = "New Teacher Added!";
+            break;
+        case 2:
+            newObject = new Section(newSectionNameTextBox.value, parseInt(newSectionMaxSizeTextBox.value), parseInt(newSectionSelectTeacherBox.value));
+            sections.push(newObject);
+            messageDiv.innerHTML = "New Section Added";
+            break;
     }
 
 }
