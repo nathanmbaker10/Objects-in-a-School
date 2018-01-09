@@ -57,7 +57,7 @@ function Section(name, maxSize, teacher) {
 
 }
 
-//
+
 function selectBoxOptionChosen() {
     messageDiv.innerHTML = "";
     document.body.fontStyle = 'normal';
