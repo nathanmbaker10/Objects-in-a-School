@@ -17,6 +17,8 @@ function createHTMLElements() {
     newSectionNameTextBox = document.getElementById("newSectionNameTextBox");
     newSectionMaxSizeTextBox= document.getElementById("newSectionMaxSizeTextBox");
     newSectionSelectTeacherBox = document.getElementById("newSectionSelectTeacher");
+    removeSelectBox = document.getElementById("removeSelectBox");
+    objectRemovalSelectBox = document.getElementById("objectForRemovalSelectBox");
 }
 function Person(firstName,lastName) {
     this.id = id;
@@ -82,7 +84,6 @@ function selectBoxOptionChosen() {
             newSectionForm.style.display = "none";
             break;
         case 2:
-            newSectionForm.style.display = "inline";
             newTeacherForm.style.display = "none";
             newStudentForm.style.display = "none";
             if (teachers.length == 0) {
@@ -90,12 +91,13 @@ function selectBoxOptionChosen() {
                 messageDiv.style.fontStyle = 'italic';
                 messageDiv.innerHTML = "You must add at least one teacher before adding a section.";
             } else {
+                newSectionForm.style.display = "inline";
                 newSectionSelectTeacherBox.options.length = 0;
                 for (var i = 0; i < teachers.length; i++) {
                     var newEl = document.createElement("option");
                     newEl.value = i;
                     newEl.innerHTML = teachers[i].firstName + " " + teachers[i].lastName;
-                    newSectionSelectTeacherBox .appendChild(newEl);
+                    newSectionSelectTeacherBox.appendChild(newEl);
                 }
             }
             break;
@@ -108,8 +110,8 @@ function addObject() {
     switch (parseInt(selectBox.value)){
         case 0:
             newObject = new Student(studentFirstNameTextBox.value, studentLastNameTextBox.value, parseInt(studentGradeSelectBox.value));
-            studentFirstNameTextBox.value = '';
-            studentLastNameTextBox.value = '';
+            studentFirstNameTextBox.value = "";
+            studentLastNameTextBox.value = "";
             students.push(newObject);
             messageDiv.innerHTML = "New Student Added!";
             break;
@@ -130,4 +132,48 @@ function addObject() {
             break;
     }
 
+}
+
+function removalBoxOptionChosen() {
+    objectRemovalSelectBox.options.length = 0;
+    switch (parseInt(removeSelectBox.value)) {
+        case 0:
+            for (var i = 0; i < students.length; i++) {
+                var newEl = document.createElement("option");
+                newEl.value = i;
+                newEl.innerHTML = students[i].firstName + " " + students[i].lastName;
+                objectRemovalSelectBox.appendChild(newEl);
+            }
+        case 1:
+            for (var i = 0; i < teachers.length; i++) {
+                var newEl = document.createElement("option");
+                newEl.value = i;
+                newEl.innerHTML = teachers[i].firstName + " " + teachers[i].lastName;
+                objectRemovalSelectBox.appendChild(newEl);
+            }
+        case 2:
+            for (var i = 0; i < sections.length; i++) {
+                var newEl = document.createElement("option");
+                newEl.value = i;
+                newEl.innerHTML = sections[i].name;
+                objectRemovalSelectBox.appendChild(newEl);
+            }
+    }
+}
+
+function removeObject() {
+    switch (parseInt(removeSelectBox.value)){
+        case 0:
+            students.splice(parseInt(objectRemovalSelectBox.value));
+            messageDiv.innerHTML = "Student Removed!";
+            removalBoxOptionChosen();
+        case 1:
+            teachers.splice(parseInt(objectRemovalSelectBox.value));
+            messageDiv.innerHTML = "Section Removed!";
+            removalBoxOptionChosen();
+        case 2:
+            sections.splice(parseInt(objectRemovalSelectBox.value));
+            messageDiv.innerHTML = "Teacher Removed!";
+            removalBoxOptionChosen();
+    }
 }

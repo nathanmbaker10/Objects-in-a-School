@@ -13,6 +13,7 @@
     <center id="body">
         <h1 id="title">Super Awesome School Management System!</h1>
         <h3 id="titleForAddingTable">Add Student, Teacher or Section!</h3>
+        <div id="addForm">
         Add:
         <select id="additionSelectBox" onchange="selectBoxOptionChosen()">
             <option>Pick Item To Add</option>
@@ -84,11 +85,20 @@
             </form>
             Teacher: <select id="newSectionSelectTeacher"></select>
             <button class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect mdl-button--raised" onclick="addObject()">Add!</button>
-        </div>
+        </div></div>
         <br>
+        <div id="removeDiv">
+            <select id="removeSelectBox" onchange="removalBoxOptionChosen()">
+                <option>Pick Item To Remove</option>
+                <option value="0">Student</option>
+                <option value="1">Teacher</option>
+                <option value="2">Section</option>
+            </select>
+            Remove: <select id="objectForRemovalSelectBox">
+        </select>
+        </div>
         <div id="messageDiv"></div>
 
-    <img>
 
     </center>
 </body>
