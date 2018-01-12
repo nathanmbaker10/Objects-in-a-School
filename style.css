@@ -1,9 +1,18 @@
-#newSectionForm{
+/*#newSectionForm{*/
+    /*display: none;*/
+/*}*/
+/*#newStudentForm{*/
+    /*display: none;*/
+/*}*/
+/*#newTeacherForm{*/
+    /*display: none;*/
+/*}*/
+div {
     display: none;
 }
-#newStudentForm{
-    display: none;
+#messageDiv{
+    display: inline;
 }
-#newTeacherForm{
-    display: none;
-}
+/*.img {*/
+    /*padding: 30px;*/
+/*}*/
