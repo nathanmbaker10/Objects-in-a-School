@@ -105,6 +105,29 @@
         </div>
         <br>
         <br>
+        <div id="editSectionForm">
+            Section: <select id="chooseSection" onchange="populateRemoveAndAddStudentBoxesForSections()">
+            <option value="-1">Pick Section!</option>
+        </select>
+            Add: <select id="addStudent">
+        </select>
+            Remove: <select id="removeStudent">
+            <option value="-1">Student to Remove</option>
+        </select>
+            <button class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect mdl-button--raised" onclick="addRemoveFromSection()">Go!</button>
+            <br>
+            <br>
+        </div>
+
+
+        <div id="listDiv">
+            <h2>Sections</h2>
+            <table id="sectionsTable"></table>
+            <h2>Teachers</h2>
+            <table id="teachersTable"></table>
+            <h2>Students</h2>
+            <table id="studentsTable"></table>
+        </div>
 
         <div id="messageDiv"></div>
 

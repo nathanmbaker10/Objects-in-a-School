@@ -1,4 +1,4 @@
-id = 0;
+var id = 0;
 function Person(firstName,lastName) {
     this.id = id;
     id++;
@@ -8,7 +8,7 @@ function Person(firstName,lastName) {
 
 function Student(grade, firstName, lastName) {
     this.grade = grade;
-    Person.call(this, firstName,  lastName);
+    Person.call(this, firstName, lastName);
 }
 
 function Teacher(subject, firstName, lastName) {
@@ -27,15 +27,19 @@ function Section(name, maxSize, teacher) {
     this.addStudent = function (student) {
         if (this.currentSize != this.maxSize) {
             this.currentSize++;
+            for (var i = 0; i < this.students.length; i++) {
+                if (student === this.students[i]) {
+                    return;
+                }
+            }
             this.students.push(student);
         }
     };
     this.removeStudent = function (id) {
         for (var i = 0; i < this.students.length; i++) {
-            for (var key in this.students[i]) {
-                if (this.students[i][key] == id) {
-                    this.students.splice(i, 1);
-                }
+            if (this.students[i]["id"] == id) {
+                this.students.splice(i, 1);
+                this.currentSize--;
             }
         }
     };
